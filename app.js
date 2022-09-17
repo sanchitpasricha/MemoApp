@@ -54,9 +54,7 @@ app.get("/posts/:postName",(req,res)=>{
         const savedTitle = post.Title;
 
         if(_.lowerCase(savedTitle) === _.lowerCase(search)){
-            console.log("Match found");
-        }else{
-            console.log("Not a Match");
+            res.render("post", {postTitle: post.Title, postPera: post.Body});
         }
     })
 });
