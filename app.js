@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const _ = require("lodash");
+
 
 const app = express();
 
@@ -42,6 +44,21 @@ app.post("/compose", function(req,res){
     posts.push(data);
 
     res.redirect("/");
+});
+
+app.get("/posts/:postName",(req,res)=>{
+
+    const search = req.params.postName;
+
+    posts.forEach(function(post){
+        const savedTitle = post.Title;
+
+        if(_.lowerCase(savedTitle) === _.lowerCase(search)){
+            console.log("Match found");
+        }else{
+            console.log("Not a Match");
+        }
+    })
 });
 
 app.listen(3000, function(){
